@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export interface ILoginPageProps {}
 
@@ -13,8 +14,18 @@ const LoginPage: FC<ILoginPageProps> = (props) => {
     setAuthing(true);
 
     signInWithPopup(auth, new GoogleAuthProvider())
-      .then((response) => {
-        console.log(response.user.uid);
+      .then(({ user }) => {
+        try {
+          axios.post("http://localhost:3500/user", {
+            email: user.email,
+            id: user.uid,
+            name: user.displayName,
+            photoUrl: user.photoURL,
+          });
+        } catch (e) {
+          console.log(e);
+        }
+        console.log(user);
         navigate("/");
       })
       .catch((error) => {
@@ -28,7 +39,7 @@ const LoginPage: FC<ILoginPageProps> = (props) => {
       <button onClick={() => signInWithGoogle()} disabled={authing}>
         Sign in with Google
       </button>
-      <div className="avatar">xxxx</div>
+      <div className="avatar">e2e</div>
     </div>
   );
 };
