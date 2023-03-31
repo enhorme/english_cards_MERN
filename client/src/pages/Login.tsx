@@ -24,10 +24,11 @@ const LoginPage: FC<ILoginPageProps> = (props) => {
   };
   return (
     <div>
-      <p>Login Page</p>
+      {/*<p>Login Page</p>*/}
       <button onClick={() => signInWithGoogle()} disabled={authing}>
         Sign in with Google
       </button>
+      <div className="avatar">xxxx</div>
     </div>
   );
 };
