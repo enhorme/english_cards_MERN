@@ -5,16 +5,15 @@ import { Route, Routes } from "react-router-dom";
 import "./App.scss";
 import LoginPage from "./pages/Login";
 import HomePage from "./pages/Home";
-import { getAuth } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
+
 import Card from "./components/ModuleWithWords";
+import useFetchUser from "./hooks/useFetchUser";
 
 initializeApp(firebaseConfig);
-const auth = getAuth();
 
 const App: FC = () => {
-  const [user] = useAuthState(auth);
-
+  const user = useFetchUser();
+  console.log(user);
   return (
     <>
       <Routes>

@@ -27,10 +27,12 @@ const Card: React.FC<CardProps> = ({ frontText, backText }) => {
   };
 
   return (
-    <div className="card-container" onClick={handleFlip}>
-      <div className={`card ${isFlipped ? "flipped" : ""}`}>
-        <div className="front">{frontText}</div>
-        <div className="back">{backText}</div>
+    <div>
+      <div className="card-container" onClick={handleFlip}>
+        <div className={`card ${isFlipped ? "flipped" : ""}`}>
+          <div className="front">{frontText}</div>
+          <div className="back">{backText}</div>
+        </div>
       </div>
     </div>
   );

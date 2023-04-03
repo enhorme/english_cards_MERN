@@ -1,8 +1,11 @@
 import User from "../models/User.js";
+import Module from "../models/Module.js";
 
 const createOrGetUser = async (req, res) => {
   try {
-    let user = await User.findOne({ id: req.body.id });
+    let user = await User.findOne({
+      firebaseUserId: req.body.id || req.query.id,
+    });
     if (!user) {
       user = new User({
         firebaseUserId: req.body.id,
@@ -13,7 +16,11 @@ const createOrGetUser = async (req, res) => {
       await user.save();
     }
 
-    res.json(user);
+    const modules = await Module.find({ createdBy: user._id })
+      .populate("cards")
+      .exec();
+
+    res.json({ user, modules });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

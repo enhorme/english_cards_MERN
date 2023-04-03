@@ -1,28 +1,5 @@
 import mongoose from "mongoose";
 
-const cardSchema = new mongoose.Schema({
-  front: {
-    type: String,
-    required: true,
-  },
-  back: {
-    type: String,
-    required: true,
-  },
-  lastStudied: {
-    type: Date,
-    default: Date.now,
-  },
-  numCorrect: {
-    type: Number,
-    default: 0,
-  },
-  numIncorrect: {
-    type: Number,
-    default: 0,
-  },
-});
-
 const moduleSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -31,10 +8,12 @@ const moduleSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  cards: {
-    type: [cardSchema],
-    required: true,
-  },
+  cards: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Card",
+    },
+  ],
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -42,4 +21,10 @@ const moduleSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("Module", moduleSchema);
+// moduleSchema.pre("remove", async function (next) {
+//   await Card.deleteMany({ _id: { $in: this.cards } });
+//   next();
+// });
+
+const Module = mongoose.model("Module", moduleSchema);
+export default Module;
