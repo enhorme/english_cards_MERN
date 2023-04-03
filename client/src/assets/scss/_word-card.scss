@@ -1,15 +1,17 @@
 .card-container {
-  display: inline-block;
-  margin: 10px;
+
 
 }
 
 .card {
-  text-transform: uppercase;
-  width: 300px;
-  height: 200px;
-  border: 1px solid black;
   position: relative;
+  margin: 10px auto;
+  width: 600px;
+  height: 400px;
+  border: 2px solid dimgrey;
+  border-radius: 8px;
+
+  text-transform: uppercase;
   transition: transform 0.6s;
   transform-style: preserve-3d;
 

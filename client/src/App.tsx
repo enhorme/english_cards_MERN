@@ -6,8 +6,8 @@ import "./App.scss";
 import LoginPage from "./pages/Login";
 import HomePage from "./pages/Home";
 
-import Card from "./components/ModuleWithWords";
 import useFetchUser from "./hooks/useFetchUser";
+import CardsList from "./components/ModuleWithWords/CardsList";
 
 initializeApp(firebaseConfig);
 
@@ -18,8 +18,8 @@ const App: FC = () => {
     <>
       <Routes>
         <Route path="/" element={user ? <HomePage /> : <LoginPage />} />
+        <Route path="/modules/:id" element={<CardsList />} />
       </Routes>
-      <Card backText="second word" frontText="first word" />
     </>
   );
 };

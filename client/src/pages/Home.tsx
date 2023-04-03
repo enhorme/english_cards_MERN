@@ -3,6 +3,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../store/userSlice";
 import Input from "../components/ModuleWithWords/Input";
+import ModuleList from "../components/ModuleList";
 
 export interface IHomePageProps {}
 
@@ -14,9 +15,10 @@ const HomePage: FC<IHomePageProps> = (props) => {
   };
   return (
     <div>
-      HomePAge
+      Home Page
       <button onClick={handleSignOut}>Logout</button>
       <Input />
+      <ModuleList />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   id: "",
@@ -22,12 +22,33 @@ const userSlice = createSlice({
     logoutUser: (state) => {
       return initialState;
     },
+    addModule: (state, { payload }) => {
+      state.modules.push(payload);
+    },
+    addCard: (state, { payload: { moduleId, card } }) => {
+      const moduleIndex = state.modules.findIndex(
+        (module) => module._id === moduleId
+      );
+      if (moduleIndex !== -1) {
+        state.modules[moduleIndex].cards.push(card);
+      }
+    },
   },
 });
 
-export const getUserStore = (state) => {
-  return state.user;
-};
+export const getUserStore = (state) => state.user;
 
-export const { setUser, logoutUser } = userSlice.actions;
+export const getUserModules = createSelector(
+  [getUserStore],
+  (user) => user.modules
+);
+
+export const getCardsByModuleId = createSelector(
+  [getUserModules, (state, moduleId) => moduleId],
+  (modules, moduleId) => {
+    const module = modules.find((module) => module._id === moduleId);
+    return module ? module.cards : [];
+  }
+);
+export const { setUser, logoutUser, addModule, addCard } = userSlice.actions;
 export default userSlice.reducer;
