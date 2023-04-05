@@ -10,11 +10,15 @@ const ModuleList = () => {
     navigate(`/modules/${elId}`);
   }
   return (
-    <ul>
+    <ul className="module">
       {modules?.map((el: any) => {
         return (
           <li key={el._id} onClick={() => handleClickToNavigate(el._id)}>
-            {el.title} <span></span>
+            <div>
+              <h3>{el.title}</h3>
+              <div>{el.cards.length}</div>
+            </div>
+            <div className="module__description">{el.description}</div>
           </li>
         );
       })}

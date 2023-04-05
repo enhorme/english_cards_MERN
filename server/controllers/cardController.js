@@ -3,27 +3,24 @@ import Module from "../models/Module.js";
 
 const createCard = async (req, res) => {
   const { id } = req.params;
-  const { front, back } = req.body;
-  console.log(id);
+  const { cards } = req.body;
   try {
     const module = await Module.findById(id).exec();
 
     if (!module) {
       return res.status(404).json({ error: "Module not found" });
     }
-
-    const newCard = new Card({
-      front,
-      back,
+    const newCards = cards.map((card) => ({
+      ...card,
       module: [module._id],
-    });
+    }));
 
-    await newCard.save();
+    const savedCards = await Card.insertMany(newCards);
 
-    module.cards.push(newCard._id);
+    module.cards.push(...savedCards.map((card) => card._id));
     await module.save();
 
-    res.status(201).json(newCard);
+    res.status(201).json(savedCards);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
@@ -49,7 +46,7 @@ const updateCard = async (req, res) => {
 
     const card = await Card.findByIdAndUpdate(
       id,
-      { front, back },
+      { front, back }
       { new: true }
     );
 

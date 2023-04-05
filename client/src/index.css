@@ -12,6 +12,30 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+ul {
+  list-style: none;
+}
+
+.submit_button {
+  background-color: #0077ff;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.submit_button:hover {
+  background-color: #0066cc;
+}
+
+.submit_button:active {
+  background-color: #0055b3;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
