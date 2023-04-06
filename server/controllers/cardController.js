@@ -46,7 +46,7 @@ const updateCard = async (req, res) => {
 
     const card = await Card.findByIdAndUpdate(
       id,
-      { front, back }
+      { front, back },
       { new: true }
     );
 

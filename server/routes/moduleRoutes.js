@@ -11,6 +11,6 @@ router.post("/:id/cards", cardController.createCard);
 router.post("/", moduleController.createModule);
 
 router.put("/:id", moduleController.updateModule);
-router.delete("/:id", moduleController.deleteModule);
+router.delete("/", moduleController.deleteModule);
 
 export default router;

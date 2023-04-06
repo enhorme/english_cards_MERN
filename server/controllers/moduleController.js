@@ -1,3 +1,4 @@
+import Card from "../models/Card.js";
 import Module from "../models/Module.js";
 
 const getAllModules = async (req, res) => {
@@ -72,17 +73,18 @@ const updateModule = async (req, res) => {
 };
 
 const deleteModule = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.query;
   try {
     const module = await Module.findById(id);
+
     if (!module) {
       return res.status(404).json({ error: "Module not found" });
     }
-    if (module.createdBy.toString() !== req.user.id) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
-    await module.remove();
-    res.status(200).json({ message: "Module deleted successfully" });
+
+    await Card.deleteMany({ module: id });
+    await module.deleteOne();
+
+    return res.status(200).json({ message: "Module deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: "Server error" });
   }

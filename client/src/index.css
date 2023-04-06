@@ -36,6 +36,14 @@ ul {
   background-color: #0055b3;
 }
 
+
+.main-container {
+  max-width: 1200px;
+  margin:0 auto;
+  padding: 20px;
+  
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

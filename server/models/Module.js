@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Card from "./Card.js";
 
 const moduleSchema = new mongoose.Schema({
   title: {
@@ -20,11 +21,6 @@ const moduleSchema = new mongoose.Schema({
     required: true,
   },
 });
-
-// moduleSchema.pre("remove", async function (next) {
-//   await Card.deleteMany({ _id: { $in: this.cards } });
-//   next();
-// });
 
 const Module = mongoose.model("Module", moduleSchema);
 export default Module;
