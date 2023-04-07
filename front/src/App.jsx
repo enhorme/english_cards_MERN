@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./services/firebase/config";
 import { Route, Routes } from "react-router-dom";
@@ -11,9 +11,8 @@ import MainLayout from "./layouts/MainLayout";
 
 initializeApp(firebaseConfig);
 
-const App: FC = () => {
+const App = () => {
   const user = useFetchUser();
-
   return (
     <>
       <Routes>

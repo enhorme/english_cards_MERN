@@ -1,10 +1,11 @@
-@import './assets/scss/_avatar';
-@import './assets/scss/_word-card';
-@import './assets/scss/_add-words';
-@import './assets/scss/_module-list';
-@import './assets/scss/_words-list-below-module';
-@import './assets/scss/_header';
-@import './assets/scss/_popup';
+@import 'assets/scss/avatar';
+@import 'assets/scss/word-card';
+@import 'assets/scss/add-words';
+@import 'assets/scss/module-list';
+@import 'assets/scss/words-list-below-module';
+@import 'assets/scss/header';
+@import 'assets/scss/popup';
+@import 'assets/scss/module-filter';
 
 .App {
   text-align: center;

@@ -1,19 +1,22 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { getUserModules } from "../store/userSlice";
+import { selectModulesByFilter } from "../store/selectors";
 import { useNavigate } from "react-router-dom";
 import ModuleListItem from "./ModueListItem";
+import ModuleFilter from "./ModuleFilter";
 
 const ModuleList = () => {
-  const modules = useSelector((state) => getUserModules(state));
+  const modules = useSelector(selectModulesByFilter);
   const navigate = useNavigate();
 
   function handleClickToNavigate(elId) {
     navigate(`/modules/${elId}`);
   }
+
   return (
     <div className="module">
-      <h2>Your Modules: ({modules.length})</h2>
+      <h2>Your Modules: ({modules?.length})</h2>
+      <ModuleFilter />
       <ul className="module__list">
         {modules?.map((el) => {
           return (

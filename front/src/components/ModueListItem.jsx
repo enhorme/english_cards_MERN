@@ -1,21 +1,16 @@
 import React from "react";
 import { AiFillDelete } from "react-icons/ai";
-import api from "../services/api/api";
+import { useDispatch } from "react-redux";
+import { deleteModule } from "../store/userSlice";
 
 function ModuleListItem({ onClick, el }) {
+  const dispatch = useDispatch();
+
   const handleDelete = async (e) => {
     e.stopPropagation();
-    try {
-      const res = await api.delete(`/module/`, {
-        params: {
-          id: el._id,
-        },
-      });
-      if (res.status === 200) {
-        console.log("Module has been deleted");
-      }
-    } catch (e) {}
+    dispatch(deleteModule(el._id));
   };
+
   return (
     <li onClick={onClick}>
       <div>

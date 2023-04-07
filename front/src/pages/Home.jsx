@@ -3,6 +3,8 @@ import AddModule from "../components/ModuleWithWords/AddModule";
 import ModuleList from "../components/ModuleList";
 
 const HomePage = () => {
+  console.log("render");
+
   return (
     <>
       <AddModule />

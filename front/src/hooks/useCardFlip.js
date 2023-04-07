@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 const useCardFlip = (initialState = false) => {
-  const [isFlipped, setIsFlipped] = useState<boolean>(initialState);
+  const [isFlipped, setIsFlipped] = useState(initialState);
   const handleFlip = () => {
     setIsFlipped((prev) => !prev);
   };
-  return [isFlipped, handleFlip] as const;
+  return [isFlipped, handleFlip];
 };
 
 export default useCardFlip;

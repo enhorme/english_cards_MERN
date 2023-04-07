@@ -40,8 +40,45 @@ export const postCards = createAsyncThunk(
       if (res.data) {
         return { moduleId: id, cards: res.data };
       }
-    } catch (err) {
-      return rejectWithValue(err.message);
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
+
+export const deleteModule = createAsyncThunk(
+  "module/deleteModule",
+  async (id, { rejectWithValue }) => {
+    try {
+      const res = await api.delete(`/module/`, {
+        params: {
+          id,
+        },
+      });
+      if (res.status === 200) {
+        return id;
+      }
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
+
+export const addModule = createAsyncThunk(
+  "module/addModule",
+  async (data, { getState, rejectWithValue }) => {
+    try {
+      const { title, description } = data;
+      const res = await api.post("/module", {
+        title,
+        description,
+        userId: getState().user.id,
+      });
+      if (res.data) {
+        return res.data;
+      }
+    } catch (e) {
+      return rejectWithValue(e.message);
     }
   }
 );
@@ -51,6 +88,7 @@ const initialState = {
   email: "",
   name: "",
   photoUrl: "",
+  filters: { activeFilter: "all", direction: "up" },
   modules: [],
 };
 
@@ -68,8 +106,8 @@ const userSlice = createSlice({
     logoutUser: (state) => {
       return initialState;
     },
-    addModule: (state, { payload }) => {
-      state.modules.push(payload);
+    changeFilter: (state, { payload }) => {
+      state.filters = payload;
     },
   },
   extraReducers: (builder) => {
@@ -98,6 +136,12 @@ const userSlice = createSlice({
           );
           state.modules[moduleIndex].cards[cardIndex] = { ...card };
         }
+      })
+      .addCase(deleteModule.fulfilled, (state, { payload }) => {
+        state.modules = state.modules.filter((el) => el._id !== payload);
+      })
+      .addCase(addModule.fulfilled, (state, { payload }) => {
+        state.modules.push(payload);
       });
   },
 });
@@ -116,5 +160,5 @@ export const getCardsByModuleId = createSelector(
   }
 );
 
-export const { setUser, logoutUser, addModule } = userSlice.actions;
+export const { setUser, logoutUser, changeFilter } = userSlice.actions;
 export default userSlice.reducer;
