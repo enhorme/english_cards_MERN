@@ -8,7 +8,12 @@ function ModuleListItem({ onClick, el }) {
 
   const handleDelete = async (e) => {
     e.stopPropagation();
-    dispatch(deleteModule(el._id));
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this item?"
+    );
+    if (isConfirmed) {
+      dispatch(deleteModule(el._id));
+    }
   };
 
   return (

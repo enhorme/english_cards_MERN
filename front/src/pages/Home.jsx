@@ -1,14 +1,16 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import AddModule from "../components/ModuleWithWords/AddModule";
 import ModuleList from "../components/ModuleList";
+import { selectModulesByFilter } from "../store/selectors";
 
 const HomePage = () => {
-  console.log("render");
+  const modules = useSelector(selectModulesByFilter);
 
   return (
     <>
       <AddModule />
-      <ModuleList />
+      <ModuleList modules={modules} />
     </>
   );
 };

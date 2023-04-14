@@ -9,6 +9,16 @@ const userSchema = new mongoose.Schema({
   name: String,
   email: String,
   photoUrl: String,
+  modules: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Module",
+      },
+    ],
+    default: [],
+  },
+  modulesCount: Number,
 });
 
 const User = mongoose.model("User", userSchema);

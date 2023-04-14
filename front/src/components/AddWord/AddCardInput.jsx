@@ -1,8 +1,11 @@
 import React from "react";
 
-const AddCardInput = () => {
+const AddCardInput = ({ id }) => {
   return (
     <div className="addwords">
+      <span>
+        <h4>{id}.</h4>
+      </span>
       <div className="addwords__card">
         <label htmlFor="">
           Original

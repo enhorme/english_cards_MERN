@@ -1,5 +1,6 @@
 import Card from "../models/Card.js";
 import Module from "../models/Module.js";
+import User from "../models/User.js";
 
 const getAllModules = async (req, res) => {
   try {
@@ -14,9 +15,9 @@ const getModulesByUserId = async (req, res) => {
   const { userId } = req.params;
   try {
     const modules = await Module.find({ createdBy: userId })
-      .populate("createdBy")
       .populate("cards")
       .exec();
+    console.log(modules)
     res.status(200).json(modules);
   } catch (error) {
     res.status(500).json({ error: "Server error" });
@@ -25,8 +26,6 @@ const getModulesByUserId = async (req, res) => {
 
 const getModuleById = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
-
   try {
     const module = await Module.findById(id).populate("cards").exec();
     if (!module) {
@@ -46,9 +45,13 @@ const createModule = async (req, res) => {
       description,
       createdBy: userId,
     });
+    const user = await User.findById(userId).exec();
+    user.modules.push(module._id);
+    await user.save();
     await module.save();
     res.status(201).json(module);
   } catch (error) {
+    console.log(error.message);
     res.status(500).json({ error: "Server error" });
   }
 };

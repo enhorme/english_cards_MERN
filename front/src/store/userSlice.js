@@ -27,6 +27,7 @@ export const postCards = createAsyncThunk(
       const { front, back } = dataRef;
 
       const data = [...front].reduce((acc, el, idx) => {
+        if (!el.value || !back[idx].value) return acc;
         acc.push({
           front: el.value,
           back: back[idx].value,

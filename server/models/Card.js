@@ -11,7 +11,7 @@ const cardSchema = new mongoose.Schema({
   },
   lastStudied: {
     type: Date,
-    default: Date.now,
+    default: () => Date.now(),
   },
   numCorrect: {
     type: Number,

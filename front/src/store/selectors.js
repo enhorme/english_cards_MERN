@@ -1,5 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 
+
+
 export const selectUser = (state) => state.user;
 export const selectActiveFilter = (state) =>
   selectUser(state).filters.activeFilter;
@@ -14,6 +16,8 @@ export const selectModules = createSelector(
 export const selectModulesByFilter = createSelector(
   [selectModules, selectActiveFilter, selectSortDirection],
   (modules, activeFilter, sortDirection) => {
+      console.log('modules',modules)
+    if (!modules) return [];
     if (activeFilter === "all") {
       return [...modules];
     }
@@ -33,4 +37,18 @@ export const selectModulesByFilter = createSelector(
     }
     return modules;
   }
+);
+
+export const selectAllUsers = (state) => state.allUsers;
+
+export const getUserId = (_, props) => props.userId;
+
+export const selectModulesByUserId = createSelector(
+    [selectAllUsers, getUserId],
+    (allUsers, userId) => {
+        // Find the user with the matching userId
+        const user = allUsers?.data.find((user) => user._id === userId);
+
+        return user ? user.modules : [];
+    }
 );

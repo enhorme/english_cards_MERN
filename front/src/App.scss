@@ -1,41 +1,16 @@
-@import 'assets/scss/avatar';
-@import 'assets/scss/word-card';
-@import 'assets/scss/add-words';
-@import 'assets/scss/module-list';
-@import 'assets/scss/words-list-below-module';
-@import 'assets/scss/header';
-@import 'assets/scss/popup';
-@import 'assets/scss/module-filter';
+@import 'assets/scss/_avatar';
+@import 'assets/scss/_word-card';
+@import 'assets/scss/_add-words';
+@import 'assets/scss/_module-list';
+@import 'assets/scss/_words-list-below-module';
+@import 'assets/scss/_header';
+@import 'assets/scss/_popup';
+@import 'assets/scss/_module-filter';
+@import 'assets/scss/_users-list';
 
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
 
 
 

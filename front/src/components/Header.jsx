@@ -39,10 +39,9 @@ const Header = ({ user }) => {
                     {user.displayName}
                   </div>
                   <div
-                    className="header__nav-user-avatar"
-                    style={{ backgroundImage: `url(${user.photoURL})` }}
+                    className="avatar"
                   >
-                    {user.displayName.charAt(0)}
+                    <img src={user.photoURL} alt="" referrerPolicy="no-referrer"/>
                   </div>
                 </div>
               </li>

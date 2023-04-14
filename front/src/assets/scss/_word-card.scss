@@ -1,3 +1,5 @@
+@import "variables";
+
 .card-container {
 
 
@@ -8,15 +10,26 @@
   margin: 10px auto;
   width: 600px;
   height: 400px;
-  border: 2px solid dimgrey;
   border-radius: 8px;
+  
 
+  background-color: $background-black;
+  box-shadow: 0 2px 5px $hover-color;
   text-transform: uppercase;
   transition: transform 0.6s;
   transform-style: preserve-3d;
 
   &.flipped {
     transform: rotateY(180deg);
+  }
+
+  &__speech-buttons{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    svg {
+      size: 50px;
+    }
   }
 }
 

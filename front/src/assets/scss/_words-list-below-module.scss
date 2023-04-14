@@ -1,3 +1,5 @@
+@import "variables";
+
 .wordslist {
   &__card{
     display: flex;
@@ -7,6 +9,7 @@
     border-radius: 6px;
     box-shadow: 0 1px 2px dimgrey;
     margin-bottom: 5px;
+    background: $background-black;
   }
   &__buttons-bar {
     display: flex;

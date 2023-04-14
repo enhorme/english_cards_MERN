@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 import { useDispatch } from "react-redux";
+import api from "../services/api/api";
 import { setUser } from "../store/userSlice";
-import axios from "axios";
 
 const useFetchUser = () => {
   const auth = getAuth();
@@ -14,13 +14,12 @@ const useFetchUser = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`http://localhost:3500/user/`, {
+        const res = await api.get(`/user`, {
           params: {
             id: user?.uid,
           },
         });
-        console.log(res.data);
-        dispatch(setUser({ ...res.data.user, modules: res.data.modules }));
+        dispatch(setUser({ ...res.data.user}));
       } catch (error) {
         console.log(error);
       }

@@ -1,54 +1,40 @@
-import React, { useEffect, useRef } from "react";
-import api from "../../services/api/api";
+import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addCards, postCards } from "../../store/userSlice";
+import { postCards } from "../../store/userSlice";
 import { useParams } from "react-router-dom";
 import AddCardInput from "./AddCardInput";
 
 const AddCard = () => {
+  const [wordsCount, setWordsCount] = useState(3);
   const formRef = useRef(null);
   const { id } = useParams();
 
-  const dispatch = useDispatch();
+  const fields = Array(wordsCount)
+    .fill(null)
+    .map((el, idx) => {
+      return idx + 1;
+    });
 
-  // async function handleAddCard(e) {
-  //   e.preventDefault();
-  //
-  //   try {
-  //     const { front, back } = formRef.current.elements;
-  //
-  //     const data = [...front].reduce((acc, el, idx) => {
-  //       acc.push({
-  //         front: el.value,
-  //         back: back[idx].value,
-  //       });
-  //       return acc;
-  //     }, []);
-  //     const res = await api.post(`module/${id}/cards`, {
-  //       cards: data,
-  //     });
-  //     if (res.data) {
-  //       console.log(res.data);
-  //       dispatch(addCards({ moduleId: id, cards: res.data }));
-  //     }
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }
+  const dispatch = useDispatch();
 
   function handleAddCard(e) {
     e.preventDefault();
-    dispatch(postCards({ dataRef: formRef.current.elements, id }));
-    formRef.current.reset();
+    dispatch(postCards({ dataRef: formRef.current.elements, id })).then((_) => {
+      formRef.current.reset();
+    });
   }
 
   return (
     <form onSubmit={handleAddCard} ref={formRef}>
-      <AddCardInput />
-      <AddCardInput />
-      <AddCardInput />
+      {fields.map((el) => {
+        return <AddCardInput key={el} id={el} />;
+      })}
+
       <button className="submit_button" type="submit">
         Submit
+      </button>
+      <button onClick={() => setWordsCount((prev) => prev + 1)} type="button">
+        add field
       </button>
     </form>
   );
